@@ -12,6 +12,10 @@ type fontCache struct {
 	cache *LRUCache
 }
 
+func AppendFontPath(path string) {
+	fonts.AppendPath(path)
+}
+
 func newFontCache(max int) fontCache {
 	return fontCache{
 		cache:NewLRUCache(max),
