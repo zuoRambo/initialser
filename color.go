@@ -13,6 +13,9 @@ func hexToRGBA(hex string) (*image.Uniform, error) {
 		format = "#%1x%1x%1x"
 		factor = 1.0 / 15.0
 	}
+	if len(hex) == 6 {
+		hex = "#" + hex
+	}
 
 	var r, g, b uint8
 	n, err := fmt.Sscanf(hex, format, &r, &g, &b)
