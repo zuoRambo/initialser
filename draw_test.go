@@ -9,7 +9,7 @@ func TestDraw(t *testing.T) {
 	a.FontSize = 160
 	a.Font = "华文黑体"
 	a.Size = 180
-	a.Background = "ff00"
+	a.Background = "#666666"
 
 	d, err := NewDrawer(a)
 	if err != nil {
