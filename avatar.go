@@ -39,7 +39,7 @@ func NewAvatar(text string) *Avatar {
 		FontSize:120,
 		Color:      "#ffffff",
 		Background: "#E08F70",
-		Font:       "sans-serif",
+		Font:       "Microsoft Sans Serif",
 	}
 }
 
