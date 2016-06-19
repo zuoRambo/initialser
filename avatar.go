@@ -39,7 +39,7 @@ func NewAvatar(text string) *Avatar {
 		FontSize:120,
 		Color:      "#ffffff",
 		Background: "#E08F70",
-		Font:       "华文仿宋",
+		Font:       "sans-serif",
 	}
 }
 
@@ -68,5 +68,13 @@ func (a *Avatar) Key() string {
 
 //Svg format svg
 func (a *Avatar) Svg() string {
-	return fmt.Sprintf(svgTpl, a.Size, a.Size, a.Background, a.Size, a.Size, a.Color, a.Font, a.FontSize, string(a.initial))
+	c := a.Color
+	if len(c) == 6 {
+		c = "#" + c
+	}
+	bg := a.Background
+	if len(bg) == 6 {
+		bg = "#" + bg
+	}
+	return fmt.Sprintf(svgTpl, a.Size, a.Size, bg, a.Size, a.Size, c, a.Font, a.FontSize, string(a.initial))
 }
