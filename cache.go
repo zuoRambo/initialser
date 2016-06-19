@@ -11,7 +11,7 @@ type fontCache struct {
 	rw    sync.RWMutex
 	cache *LRUCache
 }
-
+//AppendFontPath append font search path
 func AppendFontPath(path string) {
 	fonts.AppendPath(path)
 }
