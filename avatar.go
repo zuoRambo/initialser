@@ -3,6 +3,9 @@ package initialser
 import (
 	"fmt"
 	"strings"
+	"strconv"
+	"crypto/md5"
+	"encoding/hex"
 )
 
 //Avatar avatar
@@ -59,16 +62,19 @@ func (a *Avatar) Valid() bool {
 }
 //Key cache key
 func (a *Avatar) Key() string {
-	return fmt.Sprintf("%d_%d_%s_%s_%s_%d.%s",
-		a.Size,
-		a.FontSize,
+	keys := []string{
+		strconv.Itoa(a.Size),
+		strconv.Itoa(a.FontSize),
 		a.Font,
 		a.Background,
 		a.Color,
-		a.initial,
-		a.Ext)
+		(string(a.initial) + a.Ext),
+	}
+	keysStr := strings.Join(keys, ":")
+	h := md5.New()
+	h.Write([]byte(keysStr))
+	return hex.EncodeToString(h.Sum(nil))
 }
-
 //Svg format svg
 func (a *Avatar) Svg() string {
 	switch {
@@ -78,6 +84,5 @@ func (a *Avatar) Svg() string {
 	case len(a.Background) == 6:
 		a.Background = "#" + a.Background
 	}
-
 	return fmt.Sprintf(svgTpl, a.Size, a.Size, a.Background, a.Size, a.Size, a.Color, a.Font, a.FontSize, string(a.initial))
 }
