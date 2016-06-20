@@ -14,6 +14,7 @@ type Avatar struct {
 	Color      string
 	text       string
 	initial    rune
+	Ext        string
 }
 
 const svgTpl = `
@@ -40,6 +41,7 @@ func NewAvatar(text string) *Avatar {
 		Color:      "#ffffff",
 		Background: "#E08F70",
 		Font:       "Microsoft Sans Serif",
+		Ext:"png",
 	}
 }
 
@@ -57,13 +59,14 @@ func (a *Avatar) Valid() bool {
 }
 //Key cache key
 func (a *Avatar) Key() string {
-	return fmt.Sprintf("%d_%d_%s_%s_%s_%d",
+	return fmt.Sprintf("%d_%d_%s_%s_%s_%d.%s",
 		a.Size,
 		a.FontSize,
 		a.Font,
 		a.Background,
 		a.Color,
-		a.initial)
+		a.initial,
+		a.Ext)
 }
 
 //Svg format svg

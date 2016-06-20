@@ -96,7 +96,7 @@ func (d *Drawer) DrawToBytes(encoding ...string) ([]byte, error) {
 }
 //DrawToWriter draw image data to writer
 func (d *Drawer) DrawToWriter(w io.Writer, encoding ...string) error {
-	encode := "png"
+	encode := d.avatar.Ext
 	if len(encoding) > 0 {
 		encode = encoding[0];
 	}
