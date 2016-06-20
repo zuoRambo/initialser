@@ -68,13 +68,13 @@ func (a *Avatar) Key() string {
 
 //Svg format svg
 func (a *Avatar) Svg() string {
-	c := a.Color
-	if len(c) == 6 {
-		c = "#" + c
+	switch {
+	case len(a.Color) == 6:
+		a.Color = "#" + a.Color
+		fallthrough
+	case len(a.Background) == 6:
+		a.Background = "#" + a.Background
 	}
-	bg := a.Background
-	if len(bg) == 6 {
-		bg = "#" + bg
-	}
-	return fmt.Sprintf(svgTpl, a.Size, a.Size, bg, a.Size, a.Size, c, a.Font, a.FontSize, string(a.initial))
+
+	return fmt.Sprintf(svgTpl, a.Size, a.Size, a.Background, a.Size, a.Size, a.Color, a.Font, a.FontSize, string(a.initial))
 }
