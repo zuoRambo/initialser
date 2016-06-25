@@ -31,15 +31,5 @@ func TestDraw(t *testing.T) {
 	}
 
 
-	outFile, err := os.Create("out.png")
-	if err != nil {
-		log.Println(err)
-		os.Exit(1)
-	}
-	defer outFile.Close()
-	b := bufio.NewWriter(outFile)
-	d.DrawToWriter(b)
-	b.Flush();
-
 }
 
