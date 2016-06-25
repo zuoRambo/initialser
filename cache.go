@@ -5,7 +5,7 @@ import (
 	"github.com/leonlau/fonts"
 )
 var (
-	_font_cache = newFontCache(300)
+	_font_cache = newFontCache(20)
 )
 type fontCache struct {
 	rw    sync.RWMutex

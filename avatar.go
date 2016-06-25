@@ -60,7 +60,7 @@ func (a *Avatar) Valid() bool {
 	//TODO check params valid
 	return true
 }
-//Key cache key
+//Key cache key,md5
 func (a *Avatar) Key() string {
 	keys := []string{
 		strconv.Itoa(a.Size),

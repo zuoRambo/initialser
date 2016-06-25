@@ -67,8 +67,10 @@ func (d *Drawer) Draw() (image.Image, error) {
 	if err != nil {
 		return nil, err
 	}
+	dot.X = (fixed.I(d.avatar.Size) - fd.MeasureString(d.avatar.text)) / 2
 	fd.Dot = dot
-	fd.DrawString(string(d.avatar.initial))
+	//fd.DrawString(string(d.avatar.initial))
+	fd.DrawString(d.avatar.text)
 	return dst, nil
 }
 
