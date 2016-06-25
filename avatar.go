@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 	"strconv"
-	"crypto/md5"
-	"encoding/hex"
+//	"crypto/md5"
+//	"encoding/hex"
 )
 
 //Avatar avatar
@@ -68,12 +68,12 @@ func (a *Avatar) Key() string {
 		a.Font,
 		a.Background,
 		a.Color,
-		a.text + a.Ext,
+		a.text+"."+ a.Ext,
 	}
-	keysStr := strings.Join(keys, ":")
-	h := md5.New()
-	h.Write([]byte(keysStr))
-	return hex.EncodeToString(h.Sum(nil))
+	return strings.Join(keys, ":")
+	//	h := md5.New()
+	//	h.Write([]byte(keysStr))
+	//	return hex.EncodeToString(h.Sum(nil))
 }
 //Svg format svg
 func (a *Avatar) Svg() string {

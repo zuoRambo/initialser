@@ -4,9 +4,7 @@ import (
 	"testing"
 //"os"
 //"log"
-	"bufio"
-	"os"
-	"log"
+
 )
 
 func TestDraw(t *testing.T) {

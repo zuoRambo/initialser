@@ -4,8 +4,8 @@ import (
 )
 
 func TestKey(t *testing.T) {
-	a := NewAvatar("中国")
-	if "87523f1bd4e3cef551f53eed149f8089" != a.Key() {
+	a := NewAvatar("a")
+	if "200:120:Microsoft Sans Serif:#E08F70:#ffffff:a.png" != a.Key() {
 		t.Error("key cal error")
 	}
 }
