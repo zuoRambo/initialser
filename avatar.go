@@ -68,7 +68,7 @@ func (a *Avatar) Key() string {
 		a.Font,
 		a.Background,
 		a.Color,
-		(string(a.initial) + a.Ext),
+		a.text + a.Ext,
 	}
 	keysStr := strings.Join(keys, ":")
 	h := md5.New()
