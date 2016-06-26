@@ -16,6 +16,10 @@ func AppendFontPath(path string) {
 	fonts.AppendPath(path)
 }
 
+func OnlyPath(path string) {
+	fonts.OnlyPath(path)
+}
+
 func newFontCache(max int) fontCache {
 	return fontCache{
 		cache:NewLRUCache(max),
