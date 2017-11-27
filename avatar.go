@@ -2,10 +2,10 @@ package initialser
 
 import (
 	"fmt"
-	"strings"
 	"strconv"
-//	"crypto/md5"
-//	"encoding/hex"
+	"strings"
+	//	"crypto/md5"
+	//	"encoding/hex"
 )
 
 //Avatar avatar
@@ -37,29 +37,29 @@ const svgTpl = `
 //NewAvatar Avatar
 func NewAvatar(text string) *Avatar {
 	return &Avatar{
-		text:text,
-		Size: 200,
-		initial:[]rune(strings.ToUpper(text))[0],
-		FontSize:120,
+		text:       text,
+		Size:       200,
+		initial:    []rune(strings.ToUpper(text))[0],
+		FontSize:   120,
 		Color:      "#ffffff",
 		Background: "#E08F70",
 		Font:       "Microsoft Sans Serif",
-		Ext:"png",
+		Ext:        "png",
 	}
 }
 
-func (a *Avatar)Text(text string) *Avatar {
-	a.text = text;
+func (a *Avatar) Text(text string) *Avatar {
+	a.text = text
 	a.initial = []rune(strings.ToUpper(text))[0]
-	return a;
+	return a
 }
-
 
 //Valid check params
 func (a *Avatar) Valid() bool {
 	//TODO check params valid
 	return true
 }
+
 //Key cache key,md5
 func (a *Avatar) Key() string {
 	keys := []string{
@@ -68,13 +68,14 @@ func (a *Avatar) Key() string {
 		a.Font,
 		a.Background,
 		a.Color,
-		a.text+"."+ a.Ext,
+		a.text + "." + a.Ext,
 	}
 	return strings.Join(keys, ":")
 	//	h := md5.New()
 	//	h.Write([]byte(keysStr))
 	//	return hex.EncodeToString(h.Sum(nil))
 }
+
 //Svg format svg
 func (a *Avatar) Svg() string {
 	switch {

@@ -14,7 +14,3 @@ func TestHexToRGBA(t *testing.T) {
 		t.Error("not expected error,", err)
 	}
 }
-
-
-
-

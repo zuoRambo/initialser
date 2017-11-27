@@ -1,18 +1,18 @@
 package initialser
 
 import (
-	"github.com/golang/freetype/truetype"
-	"golang.org/x/image/font"
-	"strings"
-	"image"
-	"golang.org/x/image/draw"
-	"golang.org/x/image/math/fixed"
-	"image/jpeg"
 	"bytes"
-	"image/png"
 	"errors"
 	"github.com/golang/freetype"
+	"github.com/golang/freetype/truetype"
+	"golang.org/x/image/draw"
+	"golang.org/x/image/font"
+	"golang.org/x/image/math/fixed"
+	"image"
+	"image/jpeg"
+	"image/png"
 	"io"
+	"strings"
 )
 
 type Drawer struct {
@@ -22,6 +22,7 @@ type Drawer struct {
 	avatar *Avatar
 	scale  fixed.Int26_6
 }
+
 //NewDrawer create a Drawer
 func NewDrawer(avatar *Avatar) (*Drawer, error) {
 	trueFont, err := _font_cache.get(avatar.Font)
@@ -29,10 +30,10 @@ func NewDrawer(avatar *Avatar) (*Drawer, error) {
 		return nil, err
 	}
 	d := &Drawer{
-		font: trueFont,
-		dpi:  72.0,
-		avatar:avatar,
-		scale:fixed.Int26_6(avatar.FontSize << 6),
+		font:   trueFont,
+		dpi:    72.0,
+		avatar: avatar,
+		scale:  fixed.Int26_6(avatar.FontSize << 6),
 	}
 	d.face = truetype.NewFace(d.font, &truetype.Options{
 		Size:    float64(avatar.FontSize),
@@ -44,11 +45,11 @@ func NewDrawer(avatar *Avatar) (*Drawer, error) {
 
 //Draw draw
 func (d *Drawer) Draw() (image.Image, error) {
-	bg, err := hexToRGBA(d.avatar.Background);
+	bg, err := hexToRGBA(d.avatar.Background)
 	if err != nil {
 		return nil, err
 	}
-	fc, err := hexToRGBA(d.avatar.Color);
+	fc, err := hexToRGBA(d.avatar.Color)
 	if err != nil {
 		return nil, err
 	}
@@ -75,32 +76,34 @@ func (d *Drawer) Draw() (image.Image, error) {
 }
 
 //center cal draw text center
-func (d *Drawer)center() (fixed.Point26_6, error) {
+func (d *Drawer) center() (fixed.Point26_6, error) {
 	var gb truetype.GlyphBuf
 	err := gb.Load(d.font, d.scale, d.font.Index(d.avatar.initial), font.HintingFull)
 	if err != nil {
 		return fixed.Point26_6{}, err
 	}
 	bounds := gb.Bounds
-	dp := freetype.Pt(d.avatar.Size, d.avatar.Size).Sub(bounds.Max.Sub(bounds.Min));
-	y := dp.Y / 2 + bounds.Max.Y
-	x := dp.X / 2 - bounds.Min.X
-	return fixed.Point26_6{X:x, Y:y}, nil
+	dp := freetype.Pt(d.avatar.Size, d.avatar.Size).Sub(bounds.Max.Sub(bounds.Min))
+	y := dp.Y/2 + bounds.Max.Y
+	x := dp.X/2 - bounds.Min.X
+	return fixed.Point26_6{X: x, Y: y}, nil
 }
+
 //DrawToBytes draw image data to []byte
 func (d *Drawer) DrawToBytes(encoding ...string) ([]byte, error) {
 	var buf bytes.Buffer
-	err := d.DrawToWriter(&buf, encoding...);
+	err := d.DrawToWriter(&buf, encoding...)
 	if err != nil {
 		return nil, err
 	}
 	return buf.Bytes(), nil
 }
+
 //DrawToWriter draw image data to writer
 func (d *Drawer) DrawToWriter(w io.Writer, encoding ...string) error {
 	encode := d.avatar.Ext
 	if len(encoding) > 0 {
-		encode = encoding[0];
+		encode = encoding[0]
 	}
 	encode = strings.ToLower(encode)
 	m, err := d.Draw()

@@ -1,8 +1,8 @@
 package initialser
 
 import (
-	"image"
 	"fmt"
+	"image"
 )
 
 // Hex parses a "html" hex color-string, either in the 3 "#f0c" or 6 "#ff1034" digits form.
@@ -42,5 +42,3 @@ func (col Color) RGBA() (r, g, b, a uint32) {
 	a = 0xFFFF
 	return
 }
-
-

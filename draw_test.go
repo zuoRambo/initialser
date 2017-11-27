@@ -2,9 +2,8 @@ package initialser
 
 import (
 	"testing"
-//"os"
-//"log"
-
+	//"os"
+	//"log"
 )
 
 func TestDraw(t *testing.T) {
@@ -28,6 +27,4 @@ func TestDraw(t *testing.T) {
 		t.Error("not expected error ,", err)
 	}
 
-
 }
-

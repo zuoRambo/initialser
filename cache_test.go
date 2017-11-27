@@ -1,4 +1,5 @@
 package initialser
+
 import "testing"
 
 func TestFontCache(t *testing.T) {

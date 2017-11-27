@@ -1,16 +1,20 @@
 package initialser
+
 import (
-	"sync"
 	"github.com/golang/freetype/truetype"
 	"github.com/leonlau/fonts"
+	"sync"
 )
+
 var (
 	_font_cache = newFontCache(20)
 )
+
 type fontCache struct {
 	rw    sync.RWMutex
 	cache *LRUCache
 }
+
 //AppendFontPath append font search path
 func AppendFontPath(path string) {
 	fonts.AppendPath(path)
@@ -22,15 +26,16 @@ func OnlyPath(path string) {
 
 func newFontCache(max int) fontCache {
 	return fontCache{
-		cache:NewLRUCache(max),
+		cache: NewLRUCache(max),
 	}
 }
-func (f fontCache)get(fontName string) (*truetype.Font, error) {
+
+func (f fontCache) get(fontName string) (*truetype.Font, error) {
 	if val, ok := f.cache.Get(fontName); ok {
 		return val.(*truetype.Font), nil
-	}else {
-		f.rw.Lock();
-		defer f.rw.Unlock();
+	} else {
+		f.rw.Lock()
+		defer f.rw.Unlock()
 		if val, ok = f.cache.Get(fontName); ok {
 			return val.(*truetype.Font), nil
 		}
